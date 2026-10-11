@@ -3,6 +3,6 @@
 set -e
 cd "$(dirname "$0")"
 python3 -m venv .buildenv
-.buildenv/bin/pip install -q pyinstaller zstandard
+.buildenv/bin/pip install -q pyinstaller zstandard pypdf pillow
 .buildenv/bin/pyinstaller --noconfirm --windowed --onefile apkg2forms.py
 rm -rf .buildenv build apkg2forms.spec

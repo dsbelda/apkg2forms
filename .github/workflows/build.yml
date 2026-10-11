@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.13'}
-      - run: pip install pyinstaller zstandard
+      - run: pip install pyinstaller zstandard pypdf pillow
       - run: pyinstaller --noconfirm --windowed --onefile apkg2forms.py
       - run: ${{ matrix.pack }}
         shell: bash

@@ -1,6 +1,6 @@
 # apkg2forms
 
-Convierte un mazo de Anki (`.apkg`) en un script de Google Apps Script que crea **Formularios de Google en modo test** (con respuestas correctas y 1 punto por pregunta). Sin IA, sin APIs, solo Python estándar.
+Convierte un mazo de Anki (`.apkg`) **o un PDF de test** en un script de Google Apps Script que crea **Formularios de Google en modo test** (con respuestas correctas y 1 punto por pregunta). Sin IA, sin APIs, solo Python estándar.
 
 ## Uso
 ```
@@ -14,6 +14,12 @@ python apkg2forms.py mazo.apkg  # línea de comandos -> mazo.gs
 ## Requisitos
 - Python 3.9+ con tkinter (Windows/macOS de python.org ya lo traen; Homebrew: `brew install python-tk`; Debian/Ubuntu: `sudo apt install python3-tk`).
 - `.apkg` nuevos (zstd): Python 3.14+ o `pip install zstandard`; si no, exporta en Anki con "Compatible con versiones antiguas".
+
+## PDF de test
+El tipo de archivo se detecta solo (`.apkg` o PDF). En un PDF se buscan preguntas numeradas (`1.`, `2.`…) con opciones `A.`, `B.`, `C.`… (acentos de LaTeX y líneas partidas se arreglan). Las imágenes se asignan a la pregunta que las lleva.
+- **Un PDF no trae la clave de respuestas.** Escríbela en el campo "Respuestas" (`CABD…` en orden, o `1C 2A 3B…`; `-` o `X` si una pregunta no tiene respuesta). Sin clave el formulario se crea **sin puntuación**.
+- No se copian las tablas como tabla (salen como texto en el enunciado), ni se aplica la penalización por fallo: Forms solo suma puntos.
+- Solo PDF con texto (no escaneados). Hace falta `pip install pypdf pillow` (ya incluidos en los ejecutables).
 
 ## Qué convierte
 - **Tarjetas tipo test** (opciones `A.`/`a)` en el texto): la correcta se detecta por `Respuesta: C`, `c)`, opción en negrita o reverso con la opción.
