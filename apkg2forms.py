@@ -308,7 +308,7 @@ def report(out, bad, apkg):
 HELP = '''
 Siguientes pasos:
  1. Abre https://script.google.com -> Proyecto nuevo
- 2. Borra el código de ejemplo y pega el contenido del .gs (la interfaz lo copia al portapapeles)
+ 2. Borra el código de ejemplo y pega el contenido del .gs (la interfaz lo copia al portapapeles con "Copiar script")
  3. Arriba elige la función "crearFormularios" y pulsa Ejecutar (acepta los permisos)
  4. Los enlaces salen en el Registro de ejecución. Si quedan formularios, ejecútala otra vez.'''
 
@@ -352,23 +352,28 @@ def gui():
         lb.select_set(0, 'end')
         say('%d notas en %d mazos. Elige los mazos y pulsa Generar.' % (len(notes), len(cnt)))
 
-    def generar():
+    def generar(guardar):
         sel = {state['names'][i] for i in lb.curselection()}
         if not sel:
             return messagebox.showinfo('Nada que hacer', 'Abre un .apkg y elige mazos.')
         gs, st, nf, bad = build([x for x in state['notes'] if x[0] in sel], n_opts.get(), per_form.get(), basic.get())
         if not nf:
             return say(summary(st, nf))
+        root.clipboard_clear(); root.clipboard_append(gs)
+        if not guardar:
+            nota = '\n\nCopiado al portapapeles (no se ha guardado nada).'
+            if bad:
+                nota += '\nUsa "Guardar script" si quieres el informe .csv y las imágenes extraídas.'
+            return say(summary(st, nf) + nota + HELP)
         out = filedialog.asksaveasfilename(defaultextension='.gs', initialfile=Path(state['path']).stem + '.gs')
         if not out:
             return
         Path(out).write_text(gs, encoding='utf-8')
-        root.clipboard_clear(); root.clipboard_append(gs)
-        rep = report(out, bad, state['path'])
-        say(summary(st, nf) + '\n\nGuardado en ' + out + rep + HELP)
+        say(summary(st, nf) + '\n\nGuardado en ' + out + ' y copiado al portapapeles' + report(out, bad, state['path']) + HELP)
 
     tk.Button(top, text='Abrir .apkg…', command=abrir).pack(side='left')
-    tk.Button(opt, text='Generar script', command=generar).pack(side='right')
+    tk.Button(opt, text='Guardar script…', command=lambda: generar(True)).pack(side='right')
+    tk.Button(opt, text='Copiar script', command=lambda: generar(False)).pack(side='right', padx=6)
     root.mainloop()
 
 

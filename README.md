@@ -7,7 +7,7 @@ Convierte un mazo de Anki (`.apkg`) en un script de Google Apps Script que crea 
 python apkg2forms.py            # interfaz gráfica (macOS, Windows, Linux)
 python apkg2forms.py mazo.apkg  # línea de comandos -> mazo.gs
 ```
-1. Abre el `.apkg`, elige los mazos y pulsa **Generar script**.
+1. Abre el `.apkg`, elige los mazos y pulsa **Copiar script** (al portapapeles, listo para pegar) o **Guardar script…** (archivo `.gs`, informe `.csv` e imágenes).
 2. En https://script.google.com crea un proyecto, pega el `.gs`, elige `crearFormularios` y pulsa **Ejecutar**.
 3. Los enlaces salen en el registro. Si quedan formularios, ejecútala otra vez.
 
