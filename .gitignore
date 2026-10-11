@@ -1,0 +1,7 @@
+dist/
+build/
+.buildenv/
+*.spec
+__pycache__/
+.claude/
+CLAUDE.md
