@@ -32,5 +32,6 @@ python apkg2forms.py mazo.apkg  # línea de comandos -> mazo.gs
 
 ## Ejecutable sin Python
 - `./build.sh` genera `dist/apkg2forms.app` (macOS) o `dist/apkg2forms` (Linux). Hay que ejecutarlo en cada sistema.
-- Para Windows, macOS y Linux a la vez: sube la carpeta a GitHub; `.github/workflows/build.yml` los compila y los deja en Actions > Artifacts.
-- En macOS el `.app` no está firmado: la primera vez, clic derecho > Abrir.
+- Descarga lista (sin Python): en **Releases** del repo, `apkg2forms-windows.exe`, `apkg2forms-macos.zip` o `apkg2forms-linux` (en Linux: `chmod +x apkg2forms-linux`).
+- Para publicar una versión nueva: `git tag v1.1.0 && git push origin v1.1.0`; GitHub Actions compila los tres y los adjunta.
+- Windows avisa de "Windows protegió su PC": Más información > Ejecutar de todas formas. En macOS el `.app` no está firmado: clic derecho > Abrir.
