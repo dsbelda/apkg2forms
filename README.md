@@ -35,3 +35,6 @@ python apkg2forms.py mazo.apkg  # línea de comandos -> mazo.gs
 - Descarga lista (sin Python): en **Releases** del repo, `apkg2forms-windows.exe`, `apkg2forms-macos.zip` o `apkg2forms-linux` (en Linux: `chmod +x apkg2forms-linux`).
 - Para publicar una versión nueva: `git tag v1.1.0 && git push origin v1.1.0`; GitHub Actions compila los tres y los adjunta.
 - Windows avisa de "Windows protegió su PC": Más información > Ejecutar de todas formas. En macOS el `.app` no está firmado: clic derecho > Abrir.
+
+## Licencia
+Software libre bajo licencia [MIT](LICENSE): úsalo, cópialo, modifícalo y distribúyelo como quieras, siempre que conserves el aviso de copyright (la mención al autor original).
